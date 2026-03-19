@@ -7,27 +7,38 @@ public class PlayerController : MonoBehaviour
     private Rigidbody2D rb;
     private Animator animator;
     private Vector2 movement;
-    private SpriteRenderer sprite;
+    private Vector2 lastDirection;
+    //private SpriteRenderer sprite;
 
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
         animator = GetComponent<Animator>();
-        sprite = GetComponent<SpriteRenderer>();
+        //sprite = GetComponent<SpriteRenderer>();
     }
 
     void Update()
     {
-        movement.x = Input.GetAxisRaw("Horizontal");
-        movement.y = Input.GetAxisRaw("Vertical");
+        // input
+        Vector2 input = new Vector2(
+            Input.GetAxisRaw("Horizontal"),
+            Input.GetAxisRaw("Vertical")
+        );
+        movement = input.normalized; // normalizzare per blend tree?
 
+        // update variabili animator di movimento
+        animator.SetFloat("MoveX", movement.x);
+        animator.SetFloat("MoveY", movement.y);
         animator.SetFloat("Speed", movement.sqrMagnitude);
 
-        // flip sprite
-        if (movement.x < 0) // move to left
-            sprite.flipX = false;
-        else if (movement.x > 0) // move to right
-            sprite.flipX = true;
+        // update variabili animatori di ultima direzione
+        if (movement.sqrMagnitude > 0.1f)
+        {
+            lastDirection = movement; // update ultima direzione che posso anche usare altrove
+
+            animator.SetFloat("LastMoveX", lastDirection.x);
+            animator.SetFloat("LastMoveY", lastDirection.y);
+        }
     }
 
     void FixedUpdate()
