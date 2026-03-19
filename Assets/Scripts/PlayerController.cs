@@ -24,10 +24,10 @@ public class PlayerController : MonoBehaviour
         animator.SetFloat("Speed", movement.sqrMagnitude);
 
         // flip sprite
-        if (movement.x < 0)
-            sprite.flipX = true;
-        else if (movement.x > 0)
+        if (movement.x < 0) // move to left
             sprite.flipX = false;
+        else if (movement.x > 0) // move to right
+            sprite.flipX = true;
     }
 
     void FixedUpdate()
