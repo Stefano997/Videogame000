@@ -25,6 +25,8 @@ public class SlimeFollow : MonoBehaviour
         animator = GetComponent<Animator>();
         rb = GetComponent<Rigidbody2D>();
         sprite = GetComponent<SpriteRenderer>();
+
+        rb.interpolation = RigidbodyInterpolation2D.Interpolate;
     }
     
     void FixedUpdate()

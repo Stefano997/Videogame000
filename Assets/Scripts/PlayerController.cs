@@ -8,13 +8,15 @@ public class PlayerController : MonoBehaviour
     private Animator animator;
     private Vector2 movement;
     private Vector2 lastDirection;
-    //private SpriteRenderer sprite;
+
+    private ItemWorld currentItem;
 
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
         animator = GetComponent<Animator>();
-        //sprite = GetComponent<SpriteRenderer>();
+
+        rb.interpolation = RigidbodyInterpolation2D.Interpolate; // Per Pixel Perfect Camera
     }
 
     void Update()
@@ -39,10 +41,43 @@ public class PlayerController : MonoBehaviour
             animator.SetFloat("LastMoveX", lastDirection.x);
             animator.SetFloat("LastMoveY", lastDirection.y);
         }
+
+        if (Input.GetKeyDown(KeyCode.E) && currentItem != null)
+        {
+            currentItem.Collect();
+        }
     }
 
     void FixedUpdate()
     {
         rb.velocity = movement.normalized * moveSpeed; // movimento diagonale aggiustato
+        /*
+        Vector2 pos = rb.position;
+        float pixelsPerUnit = 16f;
+
+        pos.x = Mathf.Round(pos.x * pixelsPerUnit) / pixelsPerUnit;
+        pos.y = Mathf.Round(pos.y * pixelsPerUnit) / pixelsPerUnit;
+
+        rb.MovePosition(pos + movement * moveSpeed * Time.fixedDeltaTime);
+        */
+    }
+    void OnTriggerEnter2D(Collider2D collision)
+    {
+        ItemWorld item = collision.GetComponent<ItemWorld>();
+
+        if (item != null)
+        {
+            currentItem = item;
+        }
+    }
+
+    void OnTriggerExit2D(Collider2D collision)
+    {
+        ItemWorld item = collision.GetComponent<ItemWorld>();
+
+        if (item != null && item == currentItem)
+        {
+            currentItem = null;
+        }
     }
 }
