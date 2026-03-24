@@ -42,9 +42,10 @@ public class PlayerController : MonoBehaviour
             animator.SetFloat("LastMoveY", lastDirection.y);
         }
 
+        // raccoglie oggetto con tasto "E"
         if (Input.GetKeyDown(KeyCode.E) && currentItem != null)
         {
-            currentItem.Collect();
+            currentItem.Collect(gameObject);
         }
     }
 
