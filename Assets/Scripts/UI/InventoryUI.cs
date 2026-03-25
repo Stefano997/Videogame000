@@ -10,11 +10,16 @@ public class InventoryUI : MonoBehaviour
     void Start()
     {
         inventoryPanel.SetActive(false);
+        inventory.OnInventoryChanged += UpdateUI;
     }
 
     void Update()
     {
-        UpdateUI();
+        if (Input.GetKeyDown(KeyCode.I))
+        {
+            Debug.Log("Premuto I");
+            inventoryPanel.SetActive(!inventoryPanel.activeSelf);
+        }
     }
 
     void UpdateUI()
@@ -32,12 +37,6 @@ public class InventoryUI : MonoBehaviour
 
             InventorySlotUI slotUI = obj.GetComponent<InventorySlotUI>();
             slotUI.Setup(slot.item, slot.quantity);
-        }
-
-        if (Input.GetKeyDown(KeyCode.I))
-        {
-            inventoryPanel.SetActive(!inventoryPanel.activeSelf);
-            Debug.Log("Premuto I");
         }
     }
 }

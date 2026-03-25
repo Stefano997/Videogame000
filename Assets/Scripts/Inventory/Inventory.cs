@@ -1,9 +1,11 @@
 using System.Collections.Generic;
 using UnityEngine;
+using System;
 
 public class Inventory : MonoBehaviour
 {
     public List<InventorySlot> items = new List<InventorySlot>();
+    public event Action OnInventoryChanged;
 
     public void AddItem(ItemData itemData)
     {
@@ -23,8 +25,10 @@ public class Inventory : MonoBehaviour
             items.Add(newSlot);
         }
 
+        OnInventoryChanged?.Invoke();
         DebugInventory();
     }
+
     void DebugInventory()
     {
         Debug.Log("Inventario:");
