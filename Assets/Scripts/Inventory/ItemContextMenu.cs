@@ -40,7 +40,7 @@ public class ItemContextMenu : MonoBehaviour
         {
             Instantiate(
                 currentItem.worldPrefab,
-                player.position + Vector3.right,
+                player.position,
                 Quaternion.identity
             );
         }
