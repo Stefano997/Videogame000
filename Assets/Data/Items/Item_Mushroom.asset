@@ -12,7 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 04110fb5b2e3e564babc6cfc3a0844c4, type: 3}
   m_Name: Item_Mushroom
   m_EditorClassIdentifier: 
+  worldPrefab: {fileID: 8801258512598873785, guid: f9e0c8aaef391f542912541a9c23df38, type: 3}
   itemName: Mushroom
   icon: {fileID: 21300000, guid: 2eadd3cbdc0bdbd4f97395b153535804, type: 3}
   stackable: 1
   description: Feeds your monster a little.
+  hungerRestore: 30

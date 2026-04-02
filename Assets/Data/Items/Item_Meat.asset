@@ -12,7 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 04110fb5b2e3e564babc6cfc3a0844c4, type: 3}
   m_Name: Item_Meat
   m_EditorClassIdentifier: 
+  worldPrefab: {fileID: 8801258512598873785, guid: 2a3702868d86e0e41b36f25344518e85, type: 3}
   itemName: Meat
-  icon: {fileID: 21300000, guid: ec7d6108df1959f4186dbd884b0399f5, type: 3}
+  icon: {fileID: 21300000, guid: 5d705ee114293ac4ca687b9e4106eb93, type: 3}
   stackable: 1
   description: Feeds your monster a little.
+  hungerRestore: 30

@@ -41,6 +41,25 @@ public class Inventory : MonoBehaviour
                 Debug.Log("Item NULL!");
         }
     }
+
+    public void RemoveItem(ItemData itemData)
+    {
+        for (int i = 0; i < items.Count; i++)
+        {
+            if (items[i].item == itemData)
+            {
+                items[i].quantity--;
+
+                if (items[i].quantity <= 0)
+                {
+                    items.RemoveAt(i);
+                }
+
+                OnInventoryChanged?.Invoke();
+                return;
+            }
+        }
+    }
 }
 
 // classe helper

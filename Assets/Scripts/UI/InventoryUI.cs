@@ -1,11 +1,16 @@
 using UnityEngine;
 
+/*
+ *   Gestione inventario
+ */
+
 public class InventoryUI : MonoBehaviour
 {
     public GameObject slotPrefab;
     public GameObject inventoryPanel;
     public Transform parent;
     public Inventory inventory;
+    public ItemContextMenu contextMenu;
 
     void Start()
     {
@@ -18,7 +23,10 @@ public class InventoryUI : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.I))
         {
             Debug.Log("Premuto I");
-            inventoryPanel.SetActive(!inventoryPanel.activeSelf);
+            if (inventoryPanel.activeSelf)
+                UIManager.Instance.CloseMainPanel();
+            else
+                UIManager.Instance.OpenMainPanel(inventoryPanel);
         }
     }
 
@@ -33,10 +41,12 @@ public class InventoryUI : MonoBehaviour
         // ricrea
         foreach (var slot in inventory.items)
         {
-            GameObject obj = Instantiate(slotPrefab, parent);
+            GameObject obj = Instantiate(slotPrefab, parent); // creo UI
 
-            InventorySlotUI slotUI = obj.GetComponent<InventorySlotUI>();
-            slotUI.Setup(slot.item, slot.quantity);
+            InventorySlotUI slotUI = obj.GetComponent<InventorySlotUI>(); // Prendo componente UI
+            slotUI.contextMenu = contextMenu; // passo i riferimenti
+
+            slotUI.Setup(slot.item, slot.quantity); // faccio setup con i dati
         }
     }
 }
