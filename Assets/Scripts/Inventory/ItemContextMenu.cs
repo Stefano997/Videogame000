@@ -10,14 +10,14 @@ public class ItemContextMenu : MonoBehaviour
 
     private ItemData currentItem;
 
-    public void Open(ItemData item, Vector3 position)
+    public void Open(ItemData item, Vector3 clickPosition)
     {
         Debug.Log("Apro menu");
         currentItem = item;
 
         gameObject.SetActive(true); // attiva overlay (background + panel)
 
-        panel.position = position; // posiziona SOLO il menu
+        panel.position = clickPosition; // posiziona il menu dove avveiene il click
 
         UIManager.Instance.OpenContextMenu(this);
     }
